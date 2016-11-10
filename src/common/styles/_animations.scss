@@ -1,0 +1,10 @@
+@keyframes blinking {
+  0%, 100% {opacity:0;}
+  50% {opacity:1;}
+}
+
+@keyframes right-left {
+  0% {left: 70%;}
+  50% {left: -50%;}
+  100% {left: 100%;}
+}

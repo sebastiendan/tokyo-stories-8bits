@@ -1,0 +1,28 @@
+@import '../../../common/styles/variables';
+
+story-line .story-line {
+  position: relative;
+  padding: 10px;
+  line-height: 30px;
+
+  .continue {
+    position: absolute;
+    bottom: -40px;
+    right: 0;
+    cursor: pointer;
+    outline: none;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -15px;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 8px solid $text;
+    }
+  }
+}

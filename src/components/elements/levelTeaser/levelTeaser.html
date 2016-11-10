@@ -1,0 +1,22 @@
+<md-card>
+  <img ng-src="{{ltc.imageUrl}}" class="md-card-image" alt="{{ltc.title}}">
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">{{ltc.title}}</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-actions layout="row" layout-align="start center">
+    <md-card-icon-actions>
+      <md-button class="md-icon-button" aria-label="Favorite">
+        <md-icon md-font-set="md">favorite</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" aria-label="Share">
+        <md-icon md-font-set="md">share</md-icon>
+      </md-button>
+    </md-card-icon-actions>
+    <md-button ui-sref="{{ltc.state}}" class="md-raised md-accent" ng-click="ltc._sounds.playHit()">Play</md-button>
+  </md-card-actions>
+  <md-card-content>
+    <p class="level-description">{{ltc.description}}</p>
+  </md-card-content>
+</md-card>

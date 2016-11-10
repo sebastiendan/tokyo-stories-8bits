@@ -1,0 +1,75 @@
+<div class="story">
+  <div class="story-content">
+    <story-line content="..." timeline="pc.storyTimeline" index="1"></story-line>
+    <story-line content="... ..." timeline="pc.storyTimeline" index="2"></story-line>
+    <story-line content="Mmmhh...?!" timeline="pc.storyTimeline" index="3"></story-line>
+    <story-line content="Am I dreaming?" timeline="pc.storyTimeline" index="4"></story-line>
+    <story-line content="What is this island? It looks so familiar but new at the same time..."
+                 timeline="pc.storyTimeline" index="5">
+    </story-line>
+    <story-line content="- Who is this?! -" timeline="pc.storyTimeline" index="6"></story-line>
+    <story-line content="Arrghh!! A monster!!!" timeline="pc.storyTimeline" index="7"></story-line>
+    <story-line content="Please don't eat me... Please!" timeline="pc.storyTimeline" index="8"></story-line>
+    <story-line content="- Eating you? Mmhhh you woke me up after all... -" timeline="pc.storyTimeline" index="9"></story-line>
+    <story-line content="- (Ahahah he doesn't know I don't eat humans...) -" timeline="pc.storyTimeline" index="10"></story-line>
+    <story-line content="- Ok human! I will spare your life only if you can bring me enough food to fill my huge stomach! -" timeline="pc.storyTimeline" index="11"></story-line>
+    <story-line content="Food? Ok... Sure!" timeline="pc.storyTimeline" index="12"></story-line>
+    <story-line content="- Ah!   I forgot to tell you something... -" timeline="pc.storyTimeline" index="13"></story-line>
+    <story-line content="- I only eat Okinawan Onigiri!! -" timeline="pc.storyTimeline" index="14"></story-line>
+    <story-line content="What?! But I don't know what it is and how to cook it..." timeline="pc.storyTimeline" index="15"></story-line>
+    <story-line content="- Of course you don't... Here! Take this recipe and go before I change my mind!! -" timeline="pc.storyTimeline" index="16"></story-line>
+    <story-line content="- (Oh my god... I'm so hungry.....) -" timeline="pc.storyTimeline" index="17"></story-line>
+    <div class="story-end" ng-if="pc.storyTimeline > 17">
+      <p>Okinawan Onigiri secret recipe</p>
+      <br>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <img width="60" ng-src="{{pc.urlNori}}"/>
+            </td>
+            <td>Nori</td>
+            <td>Algae leaves</td>
+          </tr>
+          <tr>
+            <td>
+              <img width="60" ng-src="{{pc.urlRice}}"/>
+            </td>
+            <td>Rice</td>
+            <td>Algae leaves</td>
+          </tr>
+          <tr>
+            <td>
+              <img width="60" ng-src="{{pc.urlEggs}}"/>
+            </td>
+            <td>Eggs</td>
+            <td>Algae leaves</td>
+          </tr>
+          <tr>
+            <td>
+              <img width="60" ng-src="{{pc.urlTarama}}"/>
+            </td>
+            <td>Tarama</td>
+            <td>Algae leaves</td>
+          </tr>
+          <tr>
+            <td>
+              <img width="60" ng-src="{{pc.urlHerbs}}"/>
+            </td>
+            <td>Herbs</td>
+            <td>Algae leaves</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <md-button class="md-raised md-accent" ng-click="pc.start()">Go!</md-button>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="styles.css">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+  <link href="/pace.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cherry+Swash:700" rel="stylesheet">
 </head>
 <body>
-<script src="hexi.min.js"></script>
-<script src="js/main.js"></script>
+  <header>
+    <div ui-view="header"></div>
+  </header>
+  <div ui-view="main" class="ui-transition-view"></div>
+  <footer md-colors="{backgroundColor: 'default-accent'}">
+    <span class="credits">Website & game developed and designed by Sébastien Dan</span>
+    <span class="credits"> -</span>
+    <span class="credits"> Original music composed, recorded and mixed by Sébastien Dan • ©Sébastien Dan - 2016</span>
+  </footer>
+  <script src="dist/vendor.js"></script>
+  <script src="dist/app.js"></script>
 </body>
 </html>

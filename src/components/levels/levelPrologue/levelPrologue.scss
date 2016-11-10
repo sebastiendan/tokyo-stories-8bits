@@ -1,0 +1,9 @@
+@import '../../../common/styles/variables';
+
+level-prologue {
+  .story-end {
+    background-color: cornsilk;
+    border: 2px dashed $text;
+    padding: 10px 15px;
+  }
+}
