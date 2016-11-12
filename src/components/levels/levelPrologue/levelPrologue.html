@@ -72,12 +72,18 @@
     <md-button class="md-raised md-accent" ng-click="pc._sounds.playHit(); pc.storyTimeline = pc.storyTimeline+1">Next</md-button>
   </div>
   <div class="story-end story-end-2" ng-if="pc.storyTimeline == 19">
-    <p>Catch all the ingredients together in the <u>right order</u> to make an Okinawan Onigiri.</p>
+    <p>Catch all the ingredients in the <u>right order</u> to cook an Okinawan Onigiri.</p>
+    <p>Each cooked Onigiri reduces the monster's hunger level.</p>
+    <p>Cook fast, monster's appetite is increasing over time!</p>
+    <p>And if you catch the wrong ingredient, the monster will be even more hungry!!</p>
+    <md-button class="md-raised md-accent" ng-click="pc._sounds.playHit(); pc.storyTimeline = pc.storyTimeline+1">Next</md-button>
+  </div>
+  <div class="story-end story-end-2" ng-if="pc.storyTimeline == 20">
+    <u>Commands:</u>
+    <p>Use <b>up &uarr;</b> and <b>down	&darr;</b> key arrows to catch the right item.</p>
+    <p>Make enough Onigiris to clear out the monster hunger level before it gets mad and maybe finally get out of this weird dream...</p>
     <br>
-    <p>Watch out for the monster hunger level, it's increasing over time!</p>
-    <p>If you catch the wrong ingredient, the monster will be even more hungry!</p>
-    <br>
-    <p>Make enough Onigiris to succeed and maybe finally get out of this weird dream... Good luck!</p>
+    <p>Good luck!</p>
     <md-button class="md-raised md-accent" ng-click="pc._sounds.playHit(); pc.start()">Go!</md-button>
   </div>
   <div class="story-end" ng-show="pc.win">
