@@ -238,7 +238,6 @@ class PrologueController extends LevelController {
     if (this.healthBar.getHealth() == HealthBar.maxHealth) {
       this.lose = true;
     }
-    console.log(this.storyTimeline);
   };
 
   reset(): void {
@@ -261,7 +260,7 @@ class PrologueController extends LevelController {
     item.groundLevel = Math.floor(Math.random()*this.grounds.length);
     this.items.push(item);
 
-    this.timeout = this.$timeout(this.addItem, 1500 + Math.floor((4 - this.speedItem)*100));
+    this.timeout = this.$timeout(this.addItem, Math.max(1500 + Math.floor((4 - this.speedItem)*100), 500));
   }
 
 }
