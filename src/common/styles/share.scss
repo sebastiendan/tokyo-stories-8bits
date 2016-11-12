@@ -1,0 +1,17 @@
+@import 'variables';
+
+.share-sheet {
+  .md-subheader-content span {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    color: $text;
+  }
+
+  md-list-item {
+    display: inline-block;
+
+    a {
+      outline: none;
+    }
+  }
+}

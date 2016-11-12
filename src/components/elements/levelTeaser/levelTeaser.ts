@@ -17,9 +17,16 @@ export default class LevelTeaser implements IComponentOptions {
 }
 
 class LevelTeaserController {
-  static $inject = ['sounds'];
+  static $inject = ['sounds', '$mdBottomSheet'];
 
-  constructor(private _sounds: any) {
+  share: string;
+
+  constructor(private _sounds: any, private $mdBottomSheet: any) {
   }
 
+  showShareBottomSheet(): void {
+    this.$mdBottomSheet.show({
+      template: require('../shareBottomSheet/shareBottomSheet.html').replace(/###level###/g, this.share)
+    });
+  };
 }
