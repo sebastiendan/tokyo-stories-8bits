@@ -17,17 +17,22 @@ export abstract class LevelController {
   hitSound: any;
   hero: any;
   leftArrow: any;
+  lose: boolean = false;
   music: any;
   rightArrow: any;
   spaceBar: any;
   storyTimeline: number = 1;
   thingsToLoad: string[];
   upArrow: any;
+  win: boolean = false;
 
+  abstract end(): void;
+  abstract initValues(): void;
   abstract play(): void;
   abstract setupFunc(): void;
 
   start(): void {
+    this.storyTimeline = 0;
     this.game = hexi(800, 600, () => { this.setup(this.setupFunc) }, this.thingsToLoad, () => {this.game.loadingBar();});
 
     this.leftArrow = this.game.keyboard(37);
@@ -41,6 +46,7 @@ export abstract class LevelController {
 
   setup(func: () => void): void {
     func.call(this);
+    this.initValues.call(this);
     this.game.state = () => { this.play.call(this) };
   };
 

@@ -6,6 +6,7 @@ import Herbs from '../../../classes/items/herbs/herbs';
 import Nori from '../../../classes/items/nori/nori';
 import Rice from '../../../classes/items/rice/rice';
 import Tarama from '../../../classes/items/tarama/tarama';
+import HealthBar from '../../../classes/elements/healthBar';
 require('./levelPrologue.scss');
 
 export default class Prologue implements IComponentOptions {
@@ -17,7 +18,7 @@ export default class Prologue implements IComponentOptions {
 }
 
 class PrologueController extends LevelController {
-  static $inject = ['$timeout'];
+  static $inject = ['$timeout', 'sounds'];
   static foreground = [require('./assets/images/foreground.png')];
   static background = [require('./assets/images/background.png')];
   static backgroundCloud = [require('./assets/images/background-cloud.png')];
@@ -33,6 +34,7 @@ class PrologueController extends LevelController {
   backgroundCloud: any;
   foreground: any;
   goodSound: any;
+  healthBar: HealthBar;
   items: any = [];
   itemsPool: any[] = [Nori, Rice, Eggs, Tarama, Herbs];
   progress: any;
@@ -42,9 +44,8 @@ class PrologueController extends LevelController {
   progressTarama: any;
   progressHerbs: any;
   score: number;
-  scoreMessage: any;
   selectSound: any;
-  speedItem: number = 6;
+  speedItem: number;
   successSound: any;
   timeout: any;
   urlEggs: string = Eggs.sprites[0];
@@ -56,15 +57,14 @@ class PrologueController extends LevelController {
   readonly gravity = 1;
   readonly initJumpSpeed = 19;
   readonly speed = 6.1;
-  readonly grounds = [340, 400, 460];
+  readonly grounds = [340, 405, 470];
 
-  constructor(private $timeout: ITimeoutService) {
+  constructor(private $timeout: ITimeoutService, private _sounds: any) {
     super();
   }
 
   $onInit(): void {
     this.thingsToLoad = [].concat(Seb.sprites, Nori.sprites, Rice.sprites, Eggs.sprites, Herbs.sprites, Tarama.sprites, PrologueController.foreground, PrologueController.background, PrologueController.backgroundCloud, PrologueController.backgroundSun, PrologueController.music, PrologueController.hitSound, PrologueController.successSound, PrologueController.goodSound, PrologueController.selectSound);
-    // this.start();
   };
 
   $onDestroy(): void {
@@ -87,6 +87,9 @@ class PrologueController extends LevelController {
 
     this.foreground = this.game.tilingSprite(PrologueController.foreground[0], this.game.canvas.width, 220);
     this.foreground.y = 380;
+
+    this.healthBar = new HealthBar(this.game, 'Monster hunger');
+    this.healthBar.alterHealthPeriodically(1, 7000);
 
     this.progressNori = new Nori(this.game).sprite;
     this.progressRice = new Rice(this.game).sprite;
@@ -131,18 +134,8 @@ class PrologueController extends LevelController {
     this.successSound = this.game.sound(PrologueController.successSound);
     this.successSound.volume = .3;
 
-    this.timeout = this.$timeout(this.addItem, 1000);
-
     this.hero = new Seb(this.game).sprite;
-    this.hero.x = 0;
-    this.hero.groundLevel = 1;
-    this.hero.items = [];
     this.hero.playAnimation();
-
-    this.score = 0;
-    this.scoreMessage = this.game.text('Okinawan Onigiri: ' + this.score, '34px Futura', 'black', 20, 20);
-    this.scoreMessage.x = 10;
-    this.scoreMessage.y = 10;
 
     this.upArrow.press = () => {
       if (this.hero.groundLevel > 0) {
@@ -157,7 +150,19 @@ class PrologueController extends LevelController {
         this.selectSound.play();
       }
     };
-  }
+  };
+
+  initValues(): void {
+    this.healthBar.setMiddleHealth();
+    this.hero.x = 0;
+    this.hero.groundLevel = 1;
+    this.hero.items = [];
+    this.score = 0;
+    this.speedItem = 6;
+    this.music.volume = .5;
+    this.$timeout.cancel(this.timeout);
+    this.timeout = this.$timeout(this.addItem, 1000);
+  };
 
   play(): void {
     let good: boolean = false;
@@ -165,6 +170,10 @@ class PrologueController extends LevelController {
     this.game.contain(this.hero, this.game.stage);
 
     this.hero.y = this.grounds[this.hero.groundLevel];
+
+    if (this.healthBar.getHealth() == 0 || this.healthBar.getHealth() == HealthBar.maxHealth) {
+      this.game.state = () => { this.end.call(this) };
+    }
 
     this.items.forEach((item: any) => {
       item.x -= this.speedItem;
@@ -195,8 +204,8 @@ class PrologueController extends LevelController {
 
         if (this.hero.items.length == 5) {
           this.score++;
+          this.healthBar.alterHealth(-5);
           this.successSound.play();
-          this.scoreMessage.content = 'Number of onigiri: ' + this.score;
           this.hero.items = [];
           for (let i=0, len=this.progress.children.length; i<len; i++) {
             this.progress.children[i].alpha = .5;
@@ -206,6 +215,7 @@ class PrologueController extends LevelController {
             this.goodSound.play();
           } else {
             this.hitSound.play();
+            this.healthBar.alterHealth(1);
           }
         }
       }
@@ -215,7 +225,29 @@ class PrologueController extends LevelController {
     this.backgroundSun.rotation += 2;
     this.backgroundCloud.tileX -= .1;
     this.foreground.tileX -= this.speed-0.5;
-  }
+  };
+
+  end(): void {
+    this.game.pause();
+    this.music.volume = .1;
+
+    if (this.healthBar.getHealth() == 0) {
+      this.win = true;
+    }
+
+    if (this.healthBar.getHealth() == HealthBar.maxHealth) {
+      this.lose = true;
+    }
+    console.log(this.storyTimeline);
+  };
+
+  reset(): void {
+    this.win = this.lose = false;
+    this.initValues();
+    this.game.remove(this.items);
+    this.game.state = () => { this.play.call(this) };
+    this.game.resume();
+  };
 
   private addItem = () => {
     let index = Math.floor(Math.random()*this.itemsPool.length),
@@ -224,8 +256,9 @@ class PrologueController extends LevelController {
     item.id = index;
     item.alive = true;
     item.x = this.game.canvas.width - item.width;
-    item.groundLevel = Math.floor(Math.random()*this.grounds.length);
     item.vx = -this.speedItem;
+    item.scale.x = item.scale.y = .9;
+    item.groundLevel = Math.floor(Math.random()*this.grounds.length);
     this.items.push(item);
 
     this.timeout = this.$timeout(this.addItem, 1500 + Math.floor((4 - this.speedItem)*100));

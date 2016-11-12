@@ -2,6 +2,7 @@
 
 .story {
   position: absolute;
+  z-index: 1;
   top: 50%;
   left: 50%;
   width: 800px;
@@ -19,13 +20,13 @@
     width: 60%;
     height: 30%;
     transform: translateX(-50%) translateY(-50%);
+  }
 
-    .story-end {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 85%;
-      transform: translateX(-50%) translateY(-50%);
-    }
+  .story-end {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    transform: translateX(-50%) translateY(-50%);
   }
 }

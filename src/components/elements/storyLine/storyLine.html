@@ -1,4 +1,4 @@
 <div class="story-line" ng-if="slc.visible">
-  <div typewrite text="slc.content" type-delay="40" callback-fn="slc.showContinue()"></div>
+  <div typewrite text="slc.content" type-delay="40" callback-fn="slc.showContinue()" cursor="&shy;"></div>
   <div ng-show="slc.canContinue" class="continue" ng-click="slc.onContinueClick()">Continue</div>
 </div>

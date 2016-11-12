@@ -1,5 +1,5 @@
-<div class="story">
-  <div class="story-content">
+<div class="story" ng-show="pc.storyTimeline || pc.win || pc.lose">
+  <div class="story-content" ng-show="pc.storyTimeline && pc.storyTimeline < 18">
     <story-line content="..." timeline="pc.storyTimeline" index="1"></story-line>
     <story-line content="... ..." timeline="pc.storyTimeline" index="2"></story-line>
     <story-line content="Mmmhh...?!" timeline="pc.storyTimeline" index="3"></story-line>
@@ -19,57 +19,75 @@
     <story-line content="What?! But I don't know what it is and how to cook it..." timeline="pc.storyTimeline" index="15"></story-line>
     <story-line content="- Of course you don't... Here! Take this recipe and go before I change my mind!! -" timeline="pc.storyTimeline" index="16"></story-line>
     <story-line content="- (Oh my god... I'm so hungry.....) -" timeline="pc.storyTimeline" index="17"></story-line>
-    <div class="story-end" ng-if="pc.storyTimeline > 17">
-      <p>Okinawan Onigiri secret recipe</p>
-      <br>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <img width="60" ng-src="{{pc.urlNori}}"/>
-            </td>
-            <td>Nori</td>
-            <td>Algae leaves</td>
-          </tr>
-          <tr>
-            <td>
-              <img width="60" ng-src="{{pc.urlRice}}"/>
-            </td>
-            <td>Rice</td>
-            <td>Algae leaves</td>
-          </tr>
-          <tr>
-            <td>
-              <img width="60" ng-src="{{pc.urlEggs}}"/>
-            </td>
-            <td>Eggs</td>
-            <td>Algae leaves</td>
-          </tr>
-          <tr>
-            <td>
-              <img width="60" ng-src="{{pc.urlTarama}}"/>
-            </td>
-            <td>Tarama</td>
-            <td>Algae leaves</td>
-          </tr>
-          <tr>
-            <td>
-              <img width="60" ng-src="{{pc.urlHerbs}}"/>
-            </td>
-            <td>Herbs</td>
-            <td>Algae leaves</td>
-          </tr>
-        </tbody>
-      </table>
-      <br>
-      <md-button class="md-raised md-accent" ng-click="pc.start()">Go!</md-button>
-    </div>
+  </div>
+  <md-button class="md-raised md-accent skip-button" ng-show="pc.storyTimeline && pc.storyTimeline < 18" ng-click="pc._sounds.playHit(); pc.storyTimeline = 18">Skip</md-button>
+  <div class="story-end" ng-if="pc.storyTimeline == 18">
+    <p>Okinawan Onigiri secret recipe</p>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <img width="60" ng-src="{{pc.urlNori}}"/>
+          </td>
+          <td>Nori</td>
+          <td>Algae leaves</td>
+        </tr>
+        <tr>
+          <td>
+            <img width="60" ng-src="{{pc.urlRice}}"/>
+          </td>
+          <td>Rice</td>
+          <td>Algae leaves</td>
+        </tr>
+        <tr>
+          <td>
+            <img width="60" ng-src="{{pc.urlEggs}}"/>
+          </td>
+          <td>Eggs</td>
+          <td>Algae leaves</td>
+        </tr>
+        <tr>
+          <td>
+            <img width="60" ng-src="{{pc.urlTarama}}"/>
+          </td>
+          <td>Tarama</td>
+          <td>Algae leaves</td>
+        </tr>
+        <tr>
+          <td>
+            <img width="60" ng-src="{{pc.urlHerbs}}"/>
+          </td>
+          <td>Herbs</td>
+          <td>Algae leaves</td>
+        </tr>
+      </tbody>
+    </table>
+    <md-button class="md-raised md-accent" ng-click="pc._sounds.playHit(); pc.storyTimeline = pc.storyTimeline+1">Next</md-button>
+  </div>
+  <div class="story-end story-end-2" ng-if="pc.storyTimeline == 19">
+    <p>Catch all the ingredients together in the <u>right order</u> to make an Okinawan Onigiri.</p>
+    <br>
+    <p>Watch out for the monster hunger level, it's increasing over time!</p>
+    <p>If you catch the wrong ingredient, the monster will be even more hungry!</p>
+    <br>
+    <p>Make enough Onigiris to succeed and maybe finally get out of this weird dream... Good luck!</p>
+    <md-button class="md-raised md-accent" ng-click="pc._sounds.playHit(); pc.start()">Go!</md-button>
+  </div>
+  <div class="story-end" ng-show="pc.win">
+    <p>Congratulations! You managed to cook enough Okinawan Onigiris to fill the mysterious monster's stomach!</p>
+    <md-button class="md-raised md-accent" ng-click="pc.reset()">Play again!</md-button>
+    <md-button class="md-raised md-accent" ui-sref="home-page" ng-click="pc._sounds.playHit()">Quit</md-button>
+  </div>
+  <div class="story-end" ng-show="pc.lose">
+    <p>Damn it! The mysterious monster was too hungry and could not wait for your cooking.</p>
+    <md-button class="md-raised md-accent" ng-click="pc.reset()">Try again!</md-button>
+    <md-button class="md-raised md-accent" ui-sref="home-page" ng-click="pc._sounds.playHit()">Quit</md-button>
   </div>
 </div>

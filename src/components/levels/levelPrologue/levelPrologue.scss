@@ -5,5 +5,15 @@ level-prologue {
     background-color: cornsilk;
     border: 2px dashed $text;
     padding: 10px 15px;
+
+    &.story-end-2 {
+      width: 85%;
+    }
+  }
+
+  .skip-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
   }
 }
