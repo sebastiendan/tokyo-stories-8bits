@@ -5,11 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
   <link href="pace.css" rel="stylesheet" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@DanSebastien">
+  <meta name="twitter:title" content="Tokyo Stories 8bits">
+  <meta name="twitter:description" content="A Front-End developer journey in Tokyo, Japan in probably more than 8 bits...">
+  <meta name="twitter:image" content="src/components/levels/levelPrologue/assets/images/teaser.png">
+  <meta property="og:url" content="https://sebastiendan.github.io/tokyo-stories-8bits/" />
+  <meta property="og:title" content="Tokyo Stories 8bits" />
+  <meta property="og:description" content="A Front-End developer journey in Tokyo, Japan in probably more than 8 bits..." />
+  <meta property="og:image" content="src/components/levels/levelPrologue/assets/images/teaser.png" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Cherry+Swash:700" rel="stylesheet">
 </head>
 <body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.8";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+  <script>window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function(f) {
+      t._e.push(f);
+    };
+
+    return t;
+  }(document, "script", "twitter-wjs"));</script>
+
   <header>
     <div ui-view="header"></div>
   </header>

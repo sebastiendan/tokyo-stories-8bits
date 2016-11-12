@@ -9,6 +9,7 @@ export default class LevelTeaser implements IComponentOptions {
     public bindings: {[x: string]: string} = {
       description: '@',
       imageUrl: '@',
+      share: '@',
       state: '@',
       title: '@'
     };

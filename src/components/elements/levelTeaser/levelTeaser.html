@@ -7,12 +7,8 @@
   </md-card-title>
   <md-card-actions layout="row" layout-align="start center">
     <md-card-icon-actions>
-      <md-button class="md-icon-button" aria-label="Favorite">
-        <md-icon md-font-set="md">favorite</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" aria-label="Share">
-        <md-icon md-font-set="md">share</md-icon>
-      </md-button>
+      <div class="fb-like" data-href="https://sebastiendan.github.io/tokyo-stories-8bits/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+      <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-url="https://sebastiendan.github.io/tokyo-stories-8bits/" data-text="Play like me to {{ ltc.share }} level of Tokyo Stories 8bit!" data-via="DanSebastien" data-size="large">Tweet</a>
     </md-card-icon-actions>
     <md-button ui-sref="{{ltc.state}}" class="md-raised md-accent" ng-click="ltc._sounds.playHit()">Play</md-button>
   </md-card-actions>
